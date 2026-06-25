@@ -27,12 +27,100 @@ const Settings = () => {
     };
 
     const preview = (
-        <div className={`card p-4 w-64 text-center text-md `}>
-            <h3 className="text-sm font-medium mb-1 text-primary">Preview</h3>
-            <input className="input mb-2" type="text" placeholder="Your name" />
-            <div className='flex flex-row justify-around'>
-                <Button text="Press Me" variant="primary" size="sm" />
-                <span className="badge mt-2">Badge</span></div>
+        <div className="card border text-theme w-72 p-5 space-y-4">
+            <div>
+                <div className="flex items-center justify-between">
+                    <h3 className="text-primary text-lg font-bold">
+                        Premium Preview
+                    </h3>
+
+                    <span className="badge bg-primary text-primary">
+                        PRO
+                    </span>
+                </div>
+
+                <p className="text-muted text-sm mt-1">
+                    Preview how colors, spacing and components adapt to the theme.
+                </p>
+            </div>
+
+            <input
+                type="text"
+                placeholder="Enter your name"
+                className="input   text-foreground placeholder:text-muted"
+            />
+
+            <div className="flex flex-row flex-wrap justify-around gap-2">
+                <Button
+                    text="Primary"
+                    variant="primary"
+                    size="sm"
+                />
+                <Button
+                    text="Outline"
+                    variant="outline"
+                    size="sm"
+                />
+                <Button
+                    text="Ghost"
+                    variant="ghost"
+                    size="sm"
+                />
+
+                <Button
+                    text="Secondary"
+                    variant="secondary"
+                    size="sm"
+                />
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+                <div className="rounded-lg border border-1 p-3">
+                    <p className="text-xs text-muted">
+                        Revenue
+                    </p>
+                    <p className="text-primary font-bold">
+                        $12.4k
+                    </p>
+                </div>
+
+                <div className="rounded-lg border border-border bg-accent p-3">
+                    <p className="text-xs text-muted">
+                        Growth
+                    </p>
+                    <p className="text-primary font-bold">
+                        +24%
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <div className="flex justify-between text-xs mb-1">
+                    <span className="text-muted">
+                        Progress
+                    </span>
+                    <span className="text-primary">
+                        78%
+                    </span>
+                </div>
+
+                <div className="h-2 rounded-full  overflow-hidden">
+                    <div
+                        className="h-full  rounded-full"
+                        style={{ width: "78%" }}
+                    />
+                </div>
+            </div>
+
+            <div className="flex justify-between items-center border-t border-border pt-3">
+                <span className="text-muted-foreground text-xs">
+                    Active Theme
+                </span>
+
+                <span className="text-success font-medium">
+                    ● Connected
+                </span>
+            </div>
         </div>
     );
 
@@ -46,11 +134,11 @@ const Settings = () => {
                 amplitude={2}
                 waviness={1}
                 thickness={1}
-                glow={3}
+                glow={1}
                 taper={3}
                 spread={1}
                 intensity={0.4}
-                saturation={1}
+                saturation={0.5}
                 opacity={1}
                 scale={1.7}
                 glass={true}
