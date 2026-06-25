@@ -83,7 +83,7 @@ export default function NotFound() {
                 hueShift={0}
                 className="fixed inset-0 w-100vw! h-100vh! -z-0"
             />
-            <main className="relative flex min-h-screen flex-col items-center justify-center bg-transparent  p-8 transition-all duration-[2000ms] ease-in-out">
+            <main className="relative flex min-h-screen flex-col items-center justify-center bg-transparent  p-8 transition-all duration-[2000ms] ease-in-out z-10">
                 <div className=" text-center  p-8 rounded-xl backdrop-blur-md bg-transparent shadow-2xl">
                     <div className='flex flex-row items-center justify-center gap-2'>
                         <span className="text-[clamp(3rem,5vw,5rem)] font-extrabold drop-shadow-lg text-theme">4</span>

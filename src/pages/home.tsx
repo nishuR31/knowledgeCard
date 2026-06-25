@@ -29,34 +29,35 @@ export default function HomePage() {
     return (
         <>
 
-            <main className="flex min-h-screen min-w-screen flex-col items-center justify-center bg-transparent p-8 px-10">
+
+            <Strands
+                colors={strandColors}
+                count={5}
+                speed={0.2}
+                amplitude={2}
+                waviness={2}
+                thickness={0.7}
+                glow={1}
+                taper={3}
+                spread={1}
+                intensity={0.6}
+                saturation={2}
+                opacity={1}
+                scale={1.5}
+                glass={true}
+                refraction={1}
+                dispersion={5}
+                glassSize={1}
+                hueShift={0}
+                className="fixed inset-0 w-100vw! h-100vh! z-0"
+            />
+            <main className="flex min-h-screen min-w-screen flex-col items-center justify-center bg-transparent p-8 px-10 z-10">
                 {/* Hero Title */}
 
 
                 <h1 className="mb-6 text-[clamp(3rem,5vw,5rem)] py-10 flex mt-4 font-extrabold text-primary drop-shadow-lg">
                     Knowledge Card
                 </h1>
-                <Strands
-                    colors={strandColors}
-                    count={5}
-                    speed={0.2}
-                    amplitude={2}
-                    waviness={2}
-                    thickness={0.7}
-                    glow={2}
-                    taper={3}
-                    spread={1}
-                    intensity={0.6}
-                    saturation={2}
-                    opacity={1}
-                    scale={1.5}
-                    glass={true}
-                    refraction={1}
-                    dispersion={5}
-                    glassSize={1}
-                    hueShift={0}
-                    className="fixed inset-0 w-100vw! h-100vh! z-0"
-                />
                 <hr className='w-[clamp(600px,5vw,1000px)] h-[10px] rounded-md  my-10 backdrop-blur-sm' />
                 {/* Sub‑title with decryption animation for visual flair */}
                 <DecryptedText

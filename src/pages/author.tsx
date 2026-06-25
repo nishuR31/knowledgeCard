@@ -53,7 +53,7 @@ const Author = () => {
       hueShift={0}
       className="fixed inset-0 w-100vw! h-100vh! z-0"
     />
-    <div className="flex flex-col items-center p-8 bg-transparent min-h-screen">
+    <div className="flex flex-col items-center p-8 bg-transparent min-h-screen z-10">
       <img src={data?.avatar_url ?? ""} alt={data.login} className="rounded-full w-32 h-32 mb-4" />
       <h1 className="text-3xl font-bold mb-2 text-primary">{data.name || data.login}</h1>
       {data.bio && <p className="text-center max-w-md mb-4 text-secondary">{data.bio}</p>}

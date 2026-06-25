@@ -148,7 +148,7 @@ const Settings = () => {
                 hueShift={0}
                 className="fixed inset-0 w-100vw! h-100vh! -z-0"
             />
-            <main className="flex min-h-screen min-w-screen flex-col items-center justify-center bg-transparent p-8 px-10">
+            <main className="flex min-h-screen min-w-screen flex-col items-center justify-center bg-transparent p-8 px-10 z-10">
                 <h1 className="mb-6 text-3xl font-bold text-primary">Settings</h1>
                 <p className="mb-4 text-center text-secondary max-w-md">Adjust the theme and base style of the app. Your choices are reflected instantly.</p>
                 <div className="mb-4">
