@@ -1,0 +1,482 @@
+@layer base {
+  html,
+  body,
+  body *,
+  body *::before,
+  body *::after {
+    transition:
+      background-color 2s ease-in-out,
+      color 2s ease-in-out,
+      border-color 2s ease-in-out,
+      box-shadow 2s ease-in-out,
+      backdrop-filter 2s ease-in-out;
+  }
+
+
+
+:root,
+.dark {
+/* Theme */
+
+
+--bg: 9 12 18;
+--fg: 241 245 249;
+
+--surface: 15 23 42;
+--surface-fg: 241 245 249;
+
+--primary: 96 165 250;
+--primary-fg: 255 255 255;
+
+--secondary: 45 212 191;
+--secondary-fg: 8 47 73;
+
+--success: 16 185 129;
+--success-fg: 255 255 255;
+
+--warning: 249 115 22;
+--warning-fg: 255 255 255;
+
+--danger: 239 68 68;
+--danger-fg: 255 255 255;
+
+--border: 51 65 85;
+--ring: 96 165 250;
+
+
+}
+
+.light {
+--bg: 248 250 252;
+--fg: 15 23 42;
+
+
+--surface: 255 255 255;
+--surface-fg: 15 23 42;
+
+--primary: 59 130 246;
+--primary-fg: 255 255 255;
+
+--secondary: 13 148 136;
+--secondary-fg: 255 255 255;
+
+--success: 5 150 105;
+--success-fg: 255 255 255;
+
+--warning: 234 88 12;
+--warning-fg: 255 255 255;
+
+--danger: 220 38 38;
+--danger-fg: 255 255 255;
+
+--border: 226 232 240;
+--ring: 59 130 246;
+
+
+}
+
+.bg-theme {
+  background: rgb(var(--bg));
+}
+
+
+/* Base Styles */
+
+.mini {
+--radius: 8px;
+}
+
+.glass {
+--radius: 16px;
+}
+
+.clay {
+--radius: 24px;
+}
+}
+
+
+
+@layer utilities {
+
+
+
+.text-theme {
+color: rgb(var(--fg));
+}
+
+.text-muted {
+color: rgb(var(--fg) / .65);
+}
+
+.text-primary {
+color: rgb(var(--primary));
+}
+
+.text-secondary {
+color: rgb(var(--secondary));
+}
+
+.text-success {
+color: rgb(var(--success));
+}
+
+.text-danger {
+color: rgb(var(--danger));
+}
+}
+
+@layer components {
+
+/* =======================
+BASE COMPONENTS
+======================= */
+
+.card,
+.input,
+.btn,
+.modal,
+.dropdown {
+background: rgb(var(--surface));
+color: rgb(var(--surface-fg));
+
+
+border: 1px solid rgb(var(--border));
+
+border-radius: var(--radius);
+
+transition:
+  background-color .2s ease,
+  color .2s ease,
+  border-color .2s ease,
+  box-shadow .2s ease,
+  transform .2s ease;
+
+
+}
+
+.card {
+padding: 1rem;
+}
+
+.input {
+width: 100%;
+padding: .5rem .75rem;
+}
+
+.input:focus {
+outline: none;
+
+
+box-shadow:
+  0 0 0 3px rgb(var(--ring) / .25);
+
+
+}
+
+.modal {
+padding: 1.5rem;
+}
+
+.dropdown {
+overflow: hidden;
+}
+
+/* =======================
+BUTTONS
+======================= */
+
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+
+gap: .5rem;
+
+font-weight: 500;
+
+cursor: pointer;
+  transition: background-color .2s ease, transform .2s ease;
+
+white-space: nowrap;
+
+
+}
+
+.btn:hover {
+transform: translateY(-1px);
+}
+
+.btn-primary:hover { background: rgb(var(--primary) / .08); }
+.btn-outline:hover { background: rgb(var(--primary) / .08); }
+.btn-ghost:hover { background: rgb(var(--primary) / .08); }
+.btn-secondary:hover { background: rgb(var(--secondary) / .08); }
+.btn-success:hover { background: rgb(var(--success) / .08); }
+.btn-danger:hover { background: rgb(var(--danger) / .08); }
+.btn-warning:hover { background: rgb(var(--warning) / .08); }
+.btn-soft:hover { background: rgb(var(--primary) / .08); }
+
+
+
+.btn:disabled {
+opacity: .5;
+cursor: not-allowed;
+transform: none;
+}
+
+.btn:focus-visible {
+outline: none;
+
+
+box-shadow:
+  0 0 0 3px rgb(var(--ring) / .25);
+
+
+}
+
+/* Sizes */
+
+.btn-xs {
+padding: .25rem .5rem;
+font-size: .75rem;
+}
+
+.btn-sm {
+padding: .375rem .75rem;
+font-size: .875rem;
+}
+
+.btn-md {
+padding: .5rem 1rem;
+font-size: .875rem;
+}
+
+.btn-lg {
+padding: .75rem 1.5rem;
+font-size: 1rem;
+}
+
+.btn-xl {
+padding: 1rem 2rem;
+font-size: 1.125rem;
+}
+
+/* Variants */
+
+.btn-primary {
+background: rgb(var(--primary));
+color: rgb(var(--primary-fg));
+border-color: transparent;
+}
+
+.btn-secondary {
+background: rgb(var(--secondary));
+color: rgb(var(--secondary-fg));
+border-color: transparent;
+}
+
+.btn-success {
+background: rgb(var(--success));
+color: rgb(var(--success-fg));
+border-color: transparent;
+}
+
+.btn-warning {
+background: rgb(var(--warning));
+color: rgb(var(--warning-fg));
+border-color: transparent;
+}
+
+.btn-danger {
+background: rgb(var(--danger));
+color: rgb(var(--danger-fg));
+border-color: transparent;
+}
+
+.btn-outline {
+background: transparent;
+color: rgb(var(--primary));
+border-color: rgb(var(--primary));
+}
+
+
+.btn-ghost {
+background: transparent;
+color: rgb(var(--primary));
+border-color: transparent;
+}
+
+
+.btn-soft {
+background: rgb(var(--primary) / .15);
+color: rgb(var(--primary));
+border-color: transparent;
+}
+
+/* =======================
+BADGES
+======================= */
+
+.badge {
+display: inline-flex;
+align-items: center;
+
+
+padding: .25rem .5rem;
+
+font-size: .75rem;
+font-weight: 500;
+
+border-radius: calc(var(--radius) - 4px);
+
+
+}
+
+.badge-primary {
+background: rgb(var(--primary) / .15);
+color: rgb(var(--primary));
+}
+
+.badge-success {
+background: rgb(var(--success) / .15);
+color: rgb(var(--success));
+}
+
+.badge-danger {
+background: rgb(var(--danger) / .15);
+color: rgb(var(--danger));
+}
+
+/* =======================
+MINI MODE
+======================= */
+
+.mini .card,
+.mini .input,
+.mini .btn,
+.mini .modal,
+.mini .dropdown {
+box-shadow: none;
+}
+
+/* =======================
+GLASS MODE
+======================= */
+
+.glass .card,
+.glass .input,
+.glass .modal,
+.glass .dropdown {
+background: rgb(var(--surface) / .12);
+
+
+border: 1px solid rgb(255 255 255 / .12);
+
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+
+box-shadow:
+  0 8px 32px rgba(0,0,0,.18);
+
+
+}
+
+.glass .btn-primary,
+.glass .btn-secondary,
+.glass .btn-success,
+.glass .btn-warning,
+.glass .btn-danger {
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+
+
+box-shadow:
+  0 8px 24px rgba(0,0,0,.15);
+
+
+}
+.glass .btn-ghost {
+  background: transparent;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+
+.glass .btn-primary {
+background: rgb(var(--primary) / .18);
+border: 1px solid rgb(var(--primary) / .30);
+}
+
+.glass .btn-secondary {
+background: rgb(var(--secondary) / .18);
+border: 1px solid rgb(var(--secondary) / .30);
+}
+
+.glass .btn-success {
+background: rgb(var(--success) / .18);
+border: 1px solid rgb(var(--success) / .30);
+}
+
+.glass .btn-warning {
+background: rgb(var(--warning) / .18);
+border: 1px solid rgb(var(--warning) / .30);
+}
+
+.glass .btn-danger {
+background: rgb(var(--danger) / .18);
+border: 1px solid rgb(var(--danger) / .30);
+}
+
+.glass .btn-outline {
+background: rgb(var(--primary) / .08);
+
+
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+
+
+}
+
+.glass .badge {
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+
+
+border: 1px solid rgb(255 255 255 / .10);
+
+
+}
+
+/* =======================
+CLAY MODE
+======================= */
+
+.clay .card,
+.clay .input,
+.clay .btn,
+.clay .modal,
+.clay .dropdown {
+border: none;
+
+
+box-shadow:
+  8px 8px 16px rgba(0,0,0,.18),
+  -4px -4px 12px rgba(255,255,255,.04);
+
+
+}
+
+.clay .btn:active {
+box-shadow:
+inset 3px 3px 6px rgba(0,0,0,.18),
+inset -2px -2px 4px rgba(255,255,255,.04);
+}
+
+.clay .input:focus {
+box-shadow:
+inset 2px 2px 5px rgba(0,0,0,.12),
+inset -1px -1px 3px rgba(255,255,255,.03);
+}
+}
