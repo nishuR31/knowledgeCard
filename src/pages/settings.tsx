@@ -137,8 +137,8 @@ const Settings = () => {
                 glow={1}
                 taper={3}
                 spread={1}
-                intensity={0.4}
-                saturation={0.5}
+                intensity={0.5}
+                saturation={1}
                 opacity={1}
                 scale={1.7}
                 glass={true}
