@@ -394,5 +394,5 @@ export default function Strands({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={ctnDom} className={`absolute w-full h-full bg-transparent ${className}`} style={style} />;
+  return <div ref={ctnDom} className={`absolute w-full h-full bg-transparent pointer-events-none ${className}`} style={style} />;
 }
