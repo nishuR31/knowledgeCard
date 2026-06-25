@@ -17,16 +17,16 @@
 
 ## Features
 
-| | Feature |
-|---|---|
-|   | **Live GitHub data** — avatar, name, bio, followers, following, repo link |
-|   | **Redux caching** — fetched data is stored globally, no duplicate API calls |
-|   | **Glassmorphism UI** — blurred glass surfaces, gradient strand animations via WebGL |
-|   | **Micro‑animations** — hover lifts, color transitions powered by Motion & Anime.js |
-|   | **Reusable components** — `Button` (primary / secondary / outline / ghost / soft / danger), `Strands`, `Footer` |
-|   | **SPA routing** — React Router v7 with a custom animated 404 page |
-|   | **Dark & light themes** — pure CSS custom‑property token system, zero JS needed |
-|   | **Responsive** — mobile‑first, fluid layouts |
+| Feature |
+|---|
+| **Live GitHub data** — avatar, name, bio, followers, following, repo link |
+| **Redux caching** — fetched data is stored globally, no duplicate API calls |
+| **Glassmorphism UI** — blurred glass surfaces, gradient strand animations via WebGL |
+| **Micro‑animations** — hover lifts, color transitions powered by Motion & Anime.js |
+| **Reusable components** — `Button` (primary / secondary / outline / ghost / soft / danger), `Strands`, `Footer` |
+| **SPA routing** — React Router v7 with a custom animated 404 page |
+| **Dark & light themes** — pure CSS custom‑property token system, zero JS needed |
+| **Responsive** — mobile‑first, fluid layouts |
 
 ---
 
