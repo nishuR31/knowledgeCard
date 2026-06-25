@@ -1,13 +1,27 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'motion/react';
+import type { MotionValue, SpringOptions } from 'motion/react';
 import { Children, cloneElement, useEffect, useMemo, useRef, useState } from 'react';
+import type { ReactNode, KeyboardEvent } from 'react';
 
-function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize, label }) {
-    const ref = useRef(null);
+interface DockItemProps {
+    children: ReactNode;
+    className?: string;
+    onClick?: () => void;
+    mouseX: MotionValue<number>;
+    spring: SpringOptions;
+    distance: number;
+    magnification: number;
+    baseItemSize: number;
+    label?: string;
+}
+
+function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize, label }: DockItemProps) {
+    const ref = useRef<HTMLDivElement>(null);
     const isHovered = useMotionValue(0);
 
-    const mouseDistance = useTransform(mouseX, val => {
+    const mouseDistance = useTransform(mouseX, (val: number) => {
         const rect = ref.current?.getBoundingClientRect() ?? {
             x: 0,
             width: baseItemSize
@@ -18,7 +32,7 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
     const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, magnification, baseItemSize]);
     const size = useSpring(targetSize, spring);
 
-    const handleKeyDown = e => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onClick?.();
@@ -44,17 +58,24 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
             aria-haspopup="true"
             aria-label={label}
         >
-            {Children.map(children, child => cloneElement(child, { isHovered }))}
+            {Children.map(children, child => cloneElement(child as React.ReactElement<{ isHovered: MotionValue<number> }>, { isHovered }))}
         </motion.div>
     );
 }
 
-function DockLabel({ children, className = '', ...rest }) {
-    const { isHovered } = rest;
+interface DockLabelProps {
+    children?: ReactNode;
+    className?: string;
+    isHovered?: MotionValue<number>;
+    [key: string]: unknown;
+}
+
+function DockLabel({ children, className = '', isHovered }: DockLabelProps) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const unsubscribe = isHovered.on('change', latest => {
+        if (!isHovered) return;
+        const unsubscribe = isHovered.on('change', (latest: number) => {
             setIsVisible(latest === 1);
         });
         return () => unsubscribe();
@@ -79,8 +100,32 @@ function DockLabel({ children, className = '', ...rest }) {
     );
 }
 
-function DockIcon({ children, className = '' }) {
+interface DockIconProps {
+    children?: ReactNode;
+    className?: string;
+    isHovered?: MotionValue<number>;
+}
+
+function DockIcon({ children, className = '' }: DockIconProps) {
     return <div className={`flex items-center justify-center text-theme ${className}`}>{children}</div>;
+}
+
+export interface DockItemConfig {
+    icon: ReactNode;
+    label: string;
+    onClick?: () => void;
+    className?: string;
+}
+
+interface DockProps {
+    items: DockItemConfig[];
+    className?: string;
+    spring?: SpringOptions;
+    magnification?: number;
+    distance?: number;
+    panelHeight?: number;
+    dockHeight?: number;
+    baseItemSize?: number;
 }
 
 export default function Dock({
@@ -92,7 +137,7 @@ export default function Dock({
     panelHeight = 68,
     dockHeight = 256,
     baseItemSize = 50
-}) {
+}: DockProps) {
     const mouseX = useMotionValue(Infinity);
     const isHovered = useMotionValue(0);
 
@@ -101,7 +146,7 @@ export default function Dock({
         [magnification, dockHeight]
     );
     const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);
-    const height = useSpring(heightRow, spring);
+    useSpring(heightRow, spring);
 
     return (
         <motion.div style={{ scrollbarWidth: 'none' }} className="mx-2 flex max-w-full items-center">

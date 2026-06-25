@@ -1,6 +1,51 @@
 import { Renderer, Program, Mesh, Color, Triangle, RenderTarget } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ComponentProps } from 'react';
 
+interface StrandsProps extends Omit<ComponentProps<'canvas'>, 'ref'> {
+  colors?: string[];
+  count?: number;
+  speed?: number;
+  amplitude?: number;
+  waviness?: number;
+  thickness?: number;
+  glow?: number;
+  taper?: number;
+  spread?: number;
+  intensity?: number;
+  saturation?: number;
+  opacity?: number;
+  scale?: number;
+  glass?: boolean;
+  refraction?: number;
+  dispersion?: number;
+  glassSize?: number;
+  hueShift?: number;
+  className?: string;
+}
+
+interface ProfRef {
+  current: {
+    colors?: string[];
+    count?: number;
+    speed?: number;
+    amplitude?: number;
+    waviness?: number;
+    thickness?: number;
+    glow?: number;
+    taper?: number;
+    spread?: number;
+    intensity?: number;
+    saturation?: number;
+    opacity?: number;
+    scale?: number;
+    glass?: boolean;
+    refraction?: number;
+    dispersion?: number;
+    glassSize?: number;
+    hueShift?: number;
+    className?: string;
+  }
+}
 const MAX_STRANDS = 12;
 const MAX_COLORS = 8;
 
@@ -169,7 +214,7 @@ void main() {
 }
 `;
 
-const buildPalette = colors => {
+const buildPalette = (colors: string[]) => {
   const filled = colors && colors.length ? colors : ['#ffffff'];
   const padded = [];
   for (let i = 0; i < MAX_COLORS; i++) {
@@ -201,7 +246,7 @@ export default function Strands({
   glassSize = 1,
   className = '',
   style
-}) {
+}: StrandsProps) {
   const propsRef = useRef({});
   propsRef.current = {
     colors,
@@ -224,7 +269,7 @@ export default function Strands({
     glassSize
   };
 
-  const ctnDom = useRef(null);
+  const ctnDom = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctn = ctnDom.current;
@@ -252,9 +297,9 @@ export default function Strands({
       uniforms: {
         uTime: { value: 0 },
         uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uColors: { value: buildPalette(propsRef.current.colors) },
-        uColorCount: { value: Math.min(propsRef.current.colors.length, MAX_COLORS) },
-        uStrandCount: { value: Math.min(propsRef.current.count, MAX_STRANDS) },
+        uColors: { value: buildPalette((propsRef as ProfRef).current.colors ?? []) },
+        uColorCount: { value: Math.min((propsRef as ProfRef).current.colors?.length ?? 0, MAX_COLORS) },
+        uStrandCount: { value: Math.min((propsRef as ProfRef).current.count ?? 1, MAX_STRANDS) },
         uSpeed: { value: speed },
         uAmplitude: { value: amplitude },
         uWaviness: { value: waviness },
@@ -305,13 +350,13 @@ export default function Strands({
     resize();
 
     let animateId = 0;
-    const update = t => {
+    const update = (t: number) => {
       animateId = requestAnimationFrame(update);
-      const current = propsRef.current;
+      const current = (propsRef as ProfRef).current;
       program.uniforms.uTime.value = t * 0.001;
-      program.uniforms.uColors.value = buildPalette(current.colors);
-      program.uniforms.uColorCount.value = Math.min(current.colors.length, MAX_COLORS);
-      program.uniforms.uStrandCount.value = Math.min(Math.max(Math.round(current.count), 1), MAX_STRANDS);
+      program.uniforms.uColors.value = buildPalette(current.colors ?? []);
+      program.uniforms.uColorCount.value = Math.min(current.colors?.length ?? 0, MAX_COLORS);
+      program.uniforms.uStrandCount.value = Math.min(Math.max(Math.round(current.count ?? 1), 1), MAX_STRANDS);
       program.uniforms.uSpeed.value = current.speed;
       program.uniforms.uAmplitude.value = current.amplitude;
       program.uniforms.uWaviness.value = current.waviness;
@@ -330,7 +375,7 @@ export default function Strands({
         glassProgram.uniforms.uScene.value = renderTarget.texture;
         glassProgram.uniforms.uRefraction.value = current.refraction;
         glassProgram.uniforms.uDispersion.value = current.dispersion;
-        glassProgram.uniforms.uRadius.value = 0.46 * current.glassSize;
+        glassProgram.uniforms.uRadius.value = 0.46 * (current.glassSize ?? 1);
         renderer.render({ scene: glassMesh });
       } else {
         renderer.render({ scene: mesh });

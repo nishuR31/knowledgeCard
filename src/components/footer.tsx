@@ -1,12 +1,13 @@
-import Dock from './ui/dock';
+import Dock from './ui/dock.js';
 import { BookText, House, Cog, BatteryCharging, BatteryFull, BatteryMedium, BatteryLow, BatteryWarning, Globe, GlobeOff, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import useBattery from '../hooks/useBattery.jsx';
-import useOnline from '../hooks/useOnline.jsx';
+import useBattery from '../hooks/useBattery.js';
+import useOnline from '../hooks/useOnline.js';
 
 const Footer = () => {
   const navigate = useNavigate();
-  const { charging, level, err } = useBattery();
+  const { charging, level: rawLevel, err } = useBattery();
+  const level = rawLevel ?? 0;
   const online = useOnline();
   const func = () => { };
 
