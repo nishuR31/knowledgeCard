@@ -9,7 +9,6 @@ import { GitBranch, GitCommit, ChevronLeftIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 
-const strandColors = ["#3b82f6", "#06b6d4", "#10b981", "#8b5cf6", "#f59e0b", "#ef4444"];
 
 
 
@@ -18,6 +17,23 @@ const Author = () => {
   const navigate = useNavigate();
   const username = 'nishur31'; // Replace with actual GitHub username
   const existingUser = useSelector((state: RootState) => state.userSlice.user);
+  const theme = useSelector((state: RootState) => state.themeSlice.theme);
+  const strandColors =
+    theme === "dark"
+      ? [
+        "#4338ca", // indigo
+        "#5b21b6", // royal violet
+        "#6d28d9", // violet
+        "#7c3aed", // purple
+        "#2563eb", // sapphire blue
+      ]
+      : [
+        "#a5b4fc", // soft indigo
+        "#c4b5fd", // lavender
+        "#ddd6fe", // pale violet
+        "#bfdbfe", // powder blue
+        "#dbeafe", // ice blue
+      ];
   // Always call the hook to comply with React Hooks rules
   const { data: githubData, loading, error } = useGithub(username);
   const data = existingUser ?? githubData;
@@ -70,7 +86,7 @@ const Author = () => {
       taper={3}
       spread={1}
       intensity={0.6}
-      saturation={2}
+      saturation={1}
       opacity={1}
       scale={1.5}
       glass={true}
