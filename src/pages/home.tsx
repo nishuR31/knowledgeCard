@@ -1,5 +1,5 @@
 import DecryptedText from '../components/ui/decryptText';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Strands from '../components/ui/strands';
 import Button from '../components/ui/button';
 import { ArrowBigRightDash } from 'lucide-react';
