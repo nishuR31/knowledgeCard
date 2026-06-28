@@ -5,6 +5,7 @@ import NotFound from './pages/notFound';
 import Settings from './pages/settings';
 import Layout from './pages/layout';
 import Author from './pages/author';
+import Knowledge from './pages/knowledge';
 
 function App() {
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/author" element={<Author />} />
 
-          {/* <Route path="/knowledge" element={<Knowledge />} /> */}
+          <Route path="/knowledge" element={<Knowledge />} />
         </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>

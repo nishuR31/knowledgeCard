@@ -1,5 +1,5 @@
 import Dock from './ui/dock.js';
-import { BookText, House, Cog, BatteryCharging, BatteryFull, BatteryMedium, BatteryLow, BatteryWarning, Globe, GlobeOff, User } from "lucide-react";
+import { BookText, House, Cog, BatteryCharging, BatteryFull, BatteryMedium, BatteryLow, BatteryWarning, Globe, GlobeOff, User, ArrowUp } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import useBattery from '../hooks/useBattery.js';
 import useOnline from '../hooks/useOnline.js';
@@ -10,6 +10,9 @@ const Footer = () => {
   const level = rawLevel ?? 0;
   const online = useOnline();
   const func = () => { };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const items = [
     { icon: <House size={20} />, label: 'Home', onClick: () => navigate('/') },
@@ -26,19 +29,36 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-transparent text-white py-6 min-w-screen">
+    <footer className="bg-transparent text-white  max-w-screen">
       <div className="flex justify-center mb-4">
         <Dock items={items} panelHeight={68} baseItemSize={50} magnification={65} />
       </div>
-      <div className="flex flex-col items-center text-sm space-y-1">
-        <div>© 2026 Knowledge Card. All rights reserved.</div>
-        <div className="flex flex-wrap flex-row space-x-4">
-          <Link to="/privacy" className="">Privacy Policy</Link>
-          <Link to="/terms" className="">Terms of Service</Link>
+      <div className="card flex flex-row justify-around items-center text-sm h-25 space-y-1">
+        <div>
+          <Link to="/" className="flex items-center">
+            <img src="/favicon.png" alt="Logo" className="overflow-hidden object-contain scale-150 h-24 w-24 pt-1" />
+          </Link>
+        </div>
+        <div className='flex flex-col justify-center text-center space-y-5'>
+
+          <div>© 2026 Knowledge Card. All rights reserved.</div>
+          <div className="flex text-[clamp(1rem,1vw,2rem)] flex-wrap flex-row space-x-4">
+            <Link to="/privacy" className="font-bond text-muted">Privacy Policy</Link>
+            <Link to="/terms" className="font-bond text-muted">Terms of Service</Link>
+            <Link to="/author" className="font-bond text-muted">Author</Link>
+          </div>
+        </div>
+        <div className="">
+
+          <button onClick={scrollToTop} className="p-2 rounded-full animate-bounce card transition">
+            <ArrowUp size={20} />
+          </button>
         </div>
 
       </div>
-    </footer>
+
+
+    </footer >
   );
 };
 

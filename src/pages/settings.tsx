@@ -5,12 +5,20 @@ import { setTheme, setBase } from '../features/themeSlice';
 import { ArrowBigRightDash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Strands from '../components/ui/strands';
+import { useEffect } from 'react';
 
 const Settings = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
     const theme = useSelector((state: RootState) => state.themeSlice.theme);
     const base = useSelector((state: RootState) => state.themeSlice.base);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const strandColors = theme === 'dark'
+        ? ["#5c3a1a", "#6b3a10", "#4a2e10", "#3d2008"] // muted dark amber/rust
+        : ["#c9a97a", "#bfa070", "#d4b88a", "#c09060"]; // warm muted gold
 
     const toggleTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -128,7 +136,7 @@ const Settings = () => {
         <>
             <Strands
 
-                colors={["#ff0000", "#ff8306", "#ff4c05", "#ff0000"]}
+                colors={strandColors}
                 count={5}
                 speed={0.3}
                 amplitude={2}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/ui/button';
 import useGithub from '../hooks/useGithub';
@@ -21,15 +21,42 @@ const Author = () => {
   // Always call the hook to comply with React Hooks rules
   const { data: githubData, loading, error } = useGithub(username);
   const data = existingUser ?? githubData;
+  const regex: RegExp = /(@\w+)/g;
+
+  const dataBio = data?.bio
+    ?.split(regex)
+    .map((part: string, index: number) => {
+      if (regex.test(part)) {
+        const username = part.slice(1);
+
+        return (
+          <a
+            key={index}
+            href={`https://github.com/${username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted font-bold hover:underline"
+          >
+            {part}
+          </a>
+        );
+      }
+
+      return part;
+    });
+
   useEffect(() => {
     if (!existingUser && data) {
       dispatch(setUser(data));
     }
+
   }, [data, existingUser, dispatch]);
 
   if (loading) return <p className='text-muted'>Loading author information...</p>;
   if (error) return <p className='text-danger'>Failed to load author information.</p>;
   if (!data) return <p className='text-muted'>No author information available.</p>;
+
+
 
   return (<>
     <Strands
@@ -53,20 +80,18 @@ const Author = () => {
       hueShift={0}
       className="fixed inset-0 w-100vw! h-100vh! z-0"
     />
-    <div className="flex flex-col items-center p-8 bg-transparent min-h-screen z-10">
+    <div className="card max-w-2xl max-h-fit my-10 mx-auto align-center justify-center flex flex-col items-center bg-transparent  z-10">
       <img src={data?.avatar_url ?? ""} alt={data.login} className="rounded-full w-32 h-32 mb-4" />
-      <h1 className="text-3xl font-bold mb-2 text-primary">{data.name || data.login}</h1>
-      {data.bio && <p className="text-center max-w-md mb-4 text-secondary">{data.bio}</p>}
-
-      <hr className='w-[clamp(600px,5vw,1000px)] h-[10px] rounded-md  my-10 backdrop-blur-sm' />
-
-      <div className="flex flex-wrap flex-row justify-around space-x-4"> <div className='badge text-primary'>
-        {data.followers} Followers
-      </div>
-        <div className='badge text-primary'>
-          {data.following} Following
+      <h1 className="text-3xl font-bold mb-2 text-secondary">{data.name || data.login}</h1>
+      {/* {data.bio && <p className="text-center font-bold italic max-w-md mb-4 text-muted" >{data.bio}</p> */}
+      <p>{dataBio}</p>
+      <div className="flex flex-wrap flex-row justify-around space-x-4">
+        <div className='badge card text-theme'>
+          {data.followers} Followers
         </div>
-      </div>
+        <div className='badge card text-theme'>
+          {data.following} Following
+        </div>      </div>
 
       <div className="mt-5 flex flex-wrap flex-row justify-around space-x-4 gap-4">
         <Button

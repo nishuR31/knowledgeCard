@@ -19,10 +19,10 @@
 /* Theme */
 
 
---bg: 9 12 18;
---fg: 241 245 249;
+--bg: 8 15 40;
+--fg: 218 228 248;
 
---surface: 15 23 42;
+--surface: 12 22 58;
 --surface-fg: 241 245 249;
 
 --primary: 96 165 250;
@@ -47,11 +47,11 @@
 }
 
 .light {
---bg: 248 250 252;
+--bg: 252 248 240;
 --fg: 15 23 42;
 
 
---surface: 255 255 255;
+--surface: 255 252 245;
 --surface-fg: 15 23 42;
 
 --primary: 59 130 246;
@@ -373,8 +373,8 @@ background: rgb(var(--surface) / .12);
 
 border: 1px solid rgb(255 255 255 / .12);
 
-backdrop-filter: blur(18px);
--webkit-backdrop-filter: blur(18px);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 
 box-shadow:
   0 8px 32px rgba(0,0,0,.18);
@@ -387,8 +387,8 @@ box-shadow:
 .glass .btn-success,
 .glass .btn-warning,
 .glass .btn-danger {
-backdrop-filter: blur(18px);
--webkit-backdrop-filter: blur(18px);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 
 
 box-shadow:
@@ -440,8 +440,8 @@ backdrop-filter: blur(18px);
 }
 
 .glass .badge {
-backdrop-filter: blur(18px);
--webkit-backdrop-filter: blur(18px);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 
 
 border: 1px solid rgb(255 255 255 / .10);
